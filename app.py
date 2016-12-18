@@ -1,5 +1,4 @@
 from flask import Flask
-from flask import render_template
 import json
 from models import *
 
@@ -14,10 +13,14 @@ app = create_app()
     
 @app.route('/')
 def main():
-    return render_template('main.html')
+    with open('templates/main.html') as f:
+        s = f.read()
+    return s
     
 @app.route('/getdata')
-def data():
-    tasks = Task.query.all()
+@app.route('/getdata/<parent_id>')
+def data(parent_id=None):
+    print parent_id
+    tasks = Task.query.filter(Task.parent_id==parent_id).all()
     print tasks
     return json.dumps(tasks, cls=CustomEncoder)

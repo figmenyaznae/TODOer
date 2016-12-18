@@ -1,9 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="todoApp">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+    <script>
+        var todoApp = angular.module('todoApp', []);
+        todoApp.controller('todoListCtrl', function($scope, $http) {
+            $http.get('http://127.0.0.1:5000/getdata').then(function(data, status, headers, config) {
+                $scope.tasks = data.data;
+            });
+            
+            $scope.getChildData = function(id) {
+                $http.get('http://127.0.0.1:5000/getdata').then(function(data, status, headers, config) {
+                    $scope.subtasks = data.data;
+                });
+                
+            };
+        });
+    </script>
 </head>
-<body>
+<body ng-controller="todoListCtrl">
     <div class="container">
         <nav class="navbar navbar-default">
           <div class="container-fluid">
@@ -12,28 +29,13 @@
             </div>
         </nav>
         <div class="container-fluid">
-            <div id=main class="list-group">    
+            <div class="list-group">
+            <div ng-repeat="task in tasks" class="list-group-item">
+                <p class="list-group-item-text">{{ task.text }}</p>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="task.complete"></span>
             </div>
-            <input id=clickme type="button" class="btn btn-default" value="Hello, world!"></button>
         </div>
     </div>
-<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-<script>
-$.ajax({
-  url: '/getdata',
-  dataType: 'json'
-  })
-.done(function(data) {
-    for (i = 0; i < data.length; i++)
-    {
-        btn = document.createElement('a');
-        btn.href='#';
-        btn.className='list-group-item';
-        btn.textContent=data[i].text;
-        $('#main').append(btn);
-    }
-})
-</script>
 
 </body>
 </html>
