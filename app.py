@@ -20,7 +20,11 @@ def main():
 @app.route('/getdata')
 @app.route('/getdata/<parent_id>')
 def data(parent_id=None):
-    print parent_id
     tasks = Task.query.filter(Task.parent_id==parent_id).all()
-    print tasks
     return json.dumps(tasks, cls=CustomEncoder)
+    
+@app.route('/<file>')
+def file(file):
+    with open('templates/'+file) as f:
+        s = f.read()
+    return s

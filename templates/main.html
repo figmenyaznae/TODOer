@@ -4,38 +4,25 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
-    <script>
-        var todoApp = angular.module('todoApp', []);
-        todoApp.controller('todoListCtrl', function($scope, $http) {
-            $http.get('http://127.0.0.1:5000/getdata').then(function(data, status, headers, config) {
-                $scope.tasks = data.data;
-            });
-            
-            $scope.getChildData = function(id) {
-                $http.get('http://127.0.0.1:5000/getdata').then(function(data, status, headers, config) {
-                    $scope.subtasks = data.data;
-                });
-                
-            };
-        });
-    </script>
+    <script src="todo.js"></script>
 </head>
 <body ng-controller="todoListCtrl">
-    <div class="container">
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="#">Brand</a>
-            </div>
-        </nav>
-        <div class="container-fluid">
-            <div class="list-group">
-            <div ng-repeat="task in tasks" class="list-group-item">
-                <p class="list-group-item-text">{{ task.text }}</p>
-                <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="task.complete"></span>
-            </div>
+  <div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Brand</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+        <div href=# class="media" ng-repeat="task in tasks">
+            <span>{{ task.text }}</span>
+            <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="task.complete"></span>
+            <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"  ng-click="getChildData(task.id)"></span>
+            <div id="list{{ task.id }}"></div>
         </div>
     </div>
-
+  </div>
 </body>
 </html>

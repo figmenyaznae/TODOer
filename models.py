@@ -37,6 +37,7 @@ class CustomEncoder(json.JSONEncoder):
         
         if isinstance(obj, Task):
             return {
+                'id': obj.id,
                 'text':obj.text,
                 'complete': obj.complete
             }
