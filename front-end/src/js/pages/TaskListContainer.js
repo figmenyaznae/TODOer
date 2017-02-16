@@ -20,6 +20,8 @@ export default class TaskListContainer extends React.Component{
 
   render() {
     return (<TaskList tasks={this.state.tasks}
+              getDonePercent={this.getDonePercent.bind(this)}
+              toggleDone={this.toggleDone.bind(this)}
               toggleOpen={this.toggleOpen.bind(this)} />);
   }
   
@@ -35,6 +37,26 @@ export default class TaskListContainer extends React.Component{
       }
     }
     return null;
+  }
+  
+  getDonePercent(taskId) {
+    var task = this.findByIDFromList(this.state.tasks, taskId);
+    if (task.children) {
+      let s = 0;
+      for (let child of task.children)
+        s += this.getDonePercent(child.id);
+      return s / task.children.length;
+    }
+    else return task.complete * 100;
+  }
+  
+  toggleDone(taskId) {
+    var newState = Object.assign({}, this.state)
+    var task = this.findByIDFromList(newState.tasks, taskId);
+    if (task) {
+      task.complete = !task.complete;
+      this.setState(newState);
+    }
   }
   
   toggleOpen(taskId) {
