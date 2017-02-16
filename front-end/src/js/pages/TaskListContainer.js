@@ -14,15 +14,19 @@ export default class TaskListContainer extends React.Component{
           ]}
         ]},
         {id: 5, text: 'task 2', complete: false}
-      ]
+      ],
+      appending: false
     };
   }
 
   render() {
-    return (<TaskList tasks={this.state.tasks}
+    return (<TaskList parentId={-1}
+              tasks={this.state.tasks}
+              isAppending={this.state.appending}
               getDonePercent={this.getDonePercent.bind(this)}
               toggleDone={this.toggleDone.bind(this)}
-              toggleOpen={this.toggleOpen.bind(this)} />);
+              toggleOpen={this.toggleOpen.bind(this)}
+              toggleAppending={this.toggleAppending.bind(this)} />);
   }
   
   findByIDFromList(taskList, taskId) {
@@ -64,6 +68,20 @@ export default class TaskListContainer extends React.Component{
     var task = this.findByIDFromList(newState.tasks, taskId);
     if (task) {
       task.open = !task.open;
+      this.setState(newState);
+    }
+  }
+  
+  toggleAppending(taskId) {
+    var newState = Object.assign({}, this.state)
+    var task = this.findByIDFromList(newState.tasks, taskId);
+    if (task) {
+      task.appending = !task.appending;
+      this.setState(newState);
+    }
+    else
+    {
+      newState.appending = !this.state.appending;
       this.setState(newState);
     }
   }

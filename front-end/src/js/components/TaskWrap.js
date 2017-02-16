@@ -7,16 +7,23 @@ export default class TaskWrap extends React.Component{
     const { task } = this.props;
 	
     if (task.children && task.open)
-      var children = <TaskList tasks={task.children}
+      var children = <TaskList parentId={task.id}
+                       tasks={task.children}
+                       isAppending={task.appending}
                        getDonePercent={this.props.getDonePercent}
                        toggleDone={this.props.toggleDone}
-                       toggleOpen={this.props.toggleOpen} />;
+                       toggleOpen={this.props.toggleOpen}
+                       toggleAppending={this.props.toggleAppending} />;
 					   
     return (<div className="media">
-        <Task id={task.id} text={task.text} hasChildren={task.children!=undefined}
+        <Task id={task.id}
+          text={task.text}
+          done={task.complete}
+          open={task.open}
+          hasChildren={task.children!=undefined}
           donePercent={this.props.getDonePercent(task.id)}
-          done={task.complete} toggleDone={this.props.toggleDone}
-          open={task.open} toggleOpen={this.props.toggleOpen} />
+          toggleDone={this.props.toggleDone}
+          toggleOpen={this.props.toggleOpen} />
         { children }
       </div>);
   }
