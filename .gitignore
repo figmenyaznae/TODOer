@@ -1,3 +1,4 @@
 *.pyc
 *.db
 /front-end/node_modules
+front-end/src/client.min.js

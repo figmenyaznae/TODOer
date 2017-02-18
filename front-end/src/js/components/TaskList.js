@@ -9,13 +9,15 @@ export default class TaskList extends React.Component{
                   getDonePercent={this.props.getDonePercent}
                   toggleDone={this.props.toggleDone}
                   toggleOpen={this.props.toggleOpen}
-                  toggleAppending={this.props.toggleAppending} />
+                  toggleAppending={this.props.toggleAppending}
+                  appendTask={this.props.appendTask} />
     )
     return (<div className="col-md-12">
         { tasks }
         <TaskAdd parentId={this.props.parentId}
           isAppending={this.props.isAppending}
-          toggleAppending={this.props.toggleAppending} />
+          toggleAppending={this.props.toggleAppending}
+          appendTask={this.props.appendTask} />
       </div>);
   }
 }

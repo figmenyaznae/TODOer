@@ -2,8 +2,8 @@ import React from "react";
 import TaskList from "../components/TaskList";
 
 export default class TaskListContainer extends React.Component{
-  constructor() {
-    super()
+  constructor(props) {
+    super(props);
     this.state = {
       tasks: [
         {id: 0, text: 'task 1', complete: true, children: [
@@ -26,7 +26,8 @@ export default class TaskListContainer extends React.Component{
               getDonePercent={this.getDonePercent.bind(this)}
               toggleDone={this.toggleDone.bind(this)}
               toggleOpen={this.toggleOpen.bind(this)}
-              toggleAppending={this.toggleAppending.bind(this)} />);
+              toggleAppending={this.toggleAppending.bind(this)}
+              appendTask={this.appendTask.bind(this)} />);
   }
   
   findByIDFromList(taskList, taskId) {
@@ -43,6 +44,18 @@ export default class TaskListContainer extends React.Component{
     return null;
   }
   
+  getLastId(taskList) {
+    let i = 0;
+    for (let task of taskList) {
+      i = i>task.id ? i : task.id;
+      if (task.children) {
+        let j = this.getLastId(task.children);
+        j = i>j ? i : j;
+      }
+    }
+    return i;
+  }
+  
   getDonePercent(taskId) {
     var task = this.findByIDFromList(this.state.tasks, taskId);
     if (task.children) {
@@ -55,7 +68,7 @@ export default class TaskListContainer extends React.Component{
   }
   
   toggleDone(taskId) {
-    var newState = Object.assign({}, this.state)
+    var newState = Object.assign({}, this.state);
     var task = this.findByIDFromList(newState.tasks, taskId);
     if (task) {
       task.complete = !task.complete;
@@ -64,7 +77,7 @@ export default class TaskListContainer extends React.Component{
   }
   
   toggleOpen(taskId) {
-    var newState = Object.assign({}, this.state)
+    var newState = Object.assign({}, this.state);
     var task = this.findByIDFromList(newState.tasks, taskId);
     if (task) {
       task.open = !task.open;
@@ -73,7 +86,7 @@ export default class TaskListContainer extends React.Component{
   }
   
   toggleAppending(taskId) {
-    var newState = Object.assign({}, this.state)
+    var newState = Object.assign({}, this.state);
     var task = this.findByIDFromList(newState.tasks, taskId);
     if (task) {
       task.appending = !task.appending;
@@ -84,5 +97,22 @@ export default class TaskListContainer extends React.Component{
       newState.appending = !this.state.appending;
       this.setState(newState);
     }
+  }
+  
+  appendTask(parentId, text) {
+    var newState = Object.assign({}, this.state);
+    console.log(newState);
+    var task = this.findByIDFromList(newState.tasks, parentId);
+    
+    let newTask = {
+        id: this.getLastId(newState.tasks) + 1,
+        text: text,
+        complete: false
+    };
+    
+    if (task) task.children.push(newTask);
+    else newState.tasks.push(newTask);
+    
+    this.setState(newState);
   }
 }

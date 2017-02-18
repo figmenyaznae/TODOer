@@ -2,7 +2,10 @@ import React from "react";
 
 export default class AddButton extends React.Component{
   handleClick(e) {
-    this.props.toggleAppending(this.props.parentId);
+    if (this.props.isAppending)
+      this.props.onCancel();
+    else
+      this.props.toggleAppending(this.props.parentId);
   }
   
   render() {

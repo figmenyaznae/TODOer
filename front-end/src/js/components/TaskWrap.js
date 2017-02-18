@@ -13,7 +13,8 @@ export default class TaskWrap extends React.Component{
                        getDonePercent={this.props.getDonePercent}
                        toggleDone={this.props.toggleDone}
                        toggleOpen={this.props.toggleOpen}
-                       toggleAppending={this.props.toggleAppending} />;
+                       toggleAppending={this.props.toggleAppending}
+                       appendTask={this.props.appendTask} />;
 					   
     return (<div className="media">
         <Task id={task.id}
