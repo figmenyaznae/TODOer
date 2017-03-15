@@ -1,0 +1,31 @@
+.my-hidden-left
+  transition: 0.75s ease-in
+  width: 0.1%
+  visibility: hidden
+
+.my-hidden-center
+  transition: 0.75s ease-in
+  -webkit-transform: scale(0.15)
+  visibility: hidden
+
+.my-hidden
+  visibility: hidden
+  display: none
+  
+@keyframes bounce-1
+  0%
+    transform: rotate(0)
+  30%
+    transform: rotate(0)
+  70%
+    transform: rotate(15deg)
+  100%
+    transform: rotate(0)
+  
+.with-tout
+  &:hover
+    -webkit-animation:
+      name: bounce-1
+      timing-function: ease
+      duration: 1s
+      iteration-count: infinite

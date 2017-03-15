@@ -1,0 +1,23 @@
+@mixin inpuit-normal
+  height: 34px
+  padding: 6px 12px
+  font-size: 14px
+  border-radius: 16px
+  
+@mixin inpuit-small
+  height: 26px
+  padding: 6px 12px
+  font-size: 14px
+  border-radius: 16px
+  
+.my-input
+  display: block
+  width: 100%
+  @include inpuit-normal
+  transition: 0.75s ease-in
+  
+.my-input-small
+  display: block
+  width: 100%
+  @include inpuit-small
+  transition: 0.75s ease-in

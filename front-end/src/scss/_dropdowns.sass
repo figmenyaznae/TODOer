@@ -1,0 +1,19 @@
+.my-dropdown-bar
+  @include small
+  display: block
+  width: 100%
+  margin: auto
+  
+  cursor: pointer
+  text
+  &::before, &::after
+    content: ""
+    display: inline-block
+    width: 42%
+    height: 2px
+    background-color: black
+    vertical-align: top
+    margin:
+      left: 5px
+      right: 5px
+      top: 5px

@@ -1,0 +1,32 @@
+@at-root
+  // Import bootstrap font
+  @font-face
+    font-family: 'Glyphicons Halflings'
+    src: url(https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/fonts/glyphicons-halflings-regular.woff2)
+
+.my-glyphicon
+  position: relative
+  top: 1px
+  display: inline-block
+  font-family: 'Glyphicons Halflings'
+  font-style: normal
+  font-weight: normal
+  line-height: 1
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  
+.my-glyphicon-plus
+  &:before
+    content: "\002b"
+  
+.my-glyphicon-ok
+  &:before
+    content: "\e013"
+  
+.my-glyphicon-chevron-up
+  &:before
+    content: "\e113"
+
+.my-glyphicon-chevron-down
+  &:before
+    content: "\e114"

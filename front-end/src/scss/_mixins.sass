@@ -1,0 +1,22 @@
+// Source: http://nicolasgallagher.com/micro-clearfix-hack/
+@mixin clearfix()
+  &:before,
+  &:after
+    content: " "
+    display: table
+  &:after
+    clear: both
+
+@mixin normal
+  font:
+    size: 19px
+    weight: bold
+  padding: 2px 3px 0px 5px
+  border-radius: 16px
+  
+@mixin small
+  font:
+    size: 12px
+    weight: bold
+  padding: 1px 2px 0px 3px
+  border-radius: 9px

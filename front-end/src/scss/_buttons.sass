@@ -1,0 +1,68 @@
+@import mixins
+@mixin all-btn($bg-color)
+  margin: 1px 1px
+  display: inline-block
+  text-align: center
+  vertical-align: middle
+  cursor: pointer
+  background-image: none
+  border: 1px solid $border
+  white-space: nowrap
+  color: $text
+  
+  &:hover
+    background-color: lighten($bg-color, 9%)
+    border-color: darken($border, 30%)
+
+.my-btn
+  @include all-btn(#707070)
+  @include normal
+  background-color: #707070
+  transition: 0.75s ease
+  &:hover
+    box-shadow: inset 1px 1px 2px
+  
+.my-btn-small
+  @include all-btn(#707070)
+  @include small
+  background-color: #707070
+  transition: 0.75s ease
+  &:hover
+    box-shadow: inset 1px 1px 2px
+  
+.my-btn-ok
+  @include all-btn($background-ok)
+  @include normal
+  background-color: $background-ok
+  transition: 0.75s ease
+  &:hover
+    box-shadow: inset 1px 1px 2px
+  
+.my-btn-ok-small
+  @include all-btn($background-ok)
+  @include small
+  background-color: $background-ok
+  transition: 0.75s ease
+  &:hover
+    box-shadow: inset 1px 1px 2px
+  
+.my-btn-danger
+  @include all-btn($background-danger)
+  @include normal
+  background-color: $background-danger
+  transition: 0.75s ease
+  &:hover
+    box-shadow: inset 0 -2px 6px
+  transition-property: all
+  -webkit-transform: rotate(135deg)
+
+  
+.my-btn-danger-small
+  @include all-btn($background-danger)
+  @include small
+  background-color: $background-danger
+  transition: 0.75s ease
+  &:hover
+    box-shadow: inset 0 -2px 6px
+  transition-property: all
+  -webkit-transform: rotate(135deg)  
